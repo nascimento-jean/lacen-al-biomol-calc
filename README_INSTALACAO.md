@@ -1,46 +1,51 @@
-# LACEN-AL BioMol Calc — Versão 1.0
+# LACEN-AL BioMol Calc
 
-Laboratório: LACEN-AL  
-Desenvolvedor: Jean Nascimento  
-Versão: 1.0  
+Aplicativo instalável para cálculos de rotina em Biologia Molecular, PCR convencional, qPCR e normalização/desnaturação de bibliotecas Illumina.
 
-## O que é
-Aplicativo web instalável (PWA) para cálculos de rotina em Biologia Molecular, PCR convencional e qPCR.
+**Laboratório:** LACEN-AL  
+**Desenvolvedor:** Jean Nascimento  
+**Versão:** 1.1
 
-## Módulos incluídos
-- Diluição C1V1
-- Montagem de PCR/qPCR
-- Mix primer-sonda concentrado
-- Reconstituição de oligonucleotídeos
-- Número de cópias por µL
-- Curva padrão de qPCR
+## Acessar o aplicativo
+
+https://nascimento-jean.github.io/lacen-al-biomol-calc/
+
+## O que há de novo na versão 1.1
+
+- Novo módulo: **Normalização/Desnaturação Illumina — biblioteca a 20 pM**.
+- Cálculo automático de:
+  - volume de biblioteca;
+  - volume fixo de NaOH 0,2N;
+  - volume de tampão HT1/HP3;
+  - tabela rápida de bancada;
+  - alerta para lotes abaixo de 1,0 nM.
+
+## Módulos disponíveis
+
+- Diluição C1V1 = C2V2
+- Montagem de PCR convencional e qPCR
+- Preparo de mix primer-sonda concentrado
+- Reconstituição de primers e sondas
+- Cálculo de número de cópias por µL
+- Curva padrão de qPCR e eficiência
 - Diluição seriada
-- Cálculo de temperatura de anelamento
-- Histórico local de cálculos
+- Cálculo de temperatura de anelamento com base no Tm dos primers
+- Normalização/Desnaturação Illumina para preparo de biblioteca a 20 pM
+- Exportação dos cálculos em PDF ou Excel
+- Histórico local dos cálculos no navegador/dispositivo
 
-## Exportação
-- PDF: o aplicativo abre uma versão imprimível do relatório. No Android/iOS, escolha salvar/compartilhar como PDF quando disponível.
-- Excel: exporta arquivo .xls compatível com Excel/LibreOffice/Google Sheets.
+## Instalação no Android
 
-## Campo “Módulo informado pelo usuário”
-O campo aparece no cabeçalho dos relatórios como:
-Cálculos para Reações de PCR de {módulo informado}
+1. Abra o link no Google Chrome:  
+   https://nascimento-jean.github.io/lacen-al-biomol-calc/
+2. Toque no menu de três pontos.
+3. Escolha **Instalar app** ou **Adicionar à tela inicial**.
+4. Confirme.
 
-## Instalação como PWA
-Para instalação em Android e iOS, hospede esta pasta em um servidor HTTPS.
+## Instalação no iPhone/iOS
 
-Exemplos:
-- GitHub Pages
-- Netlify
-- Vercel
-- servidor institucional HTTPS do laboratório
-
-Android:
-1. Abrir o endereço no Chrome.
-2. Menu ⋮ > Instalar app ou Adicionar à tela inicial.
-
-iOS:
-1. Abrir o endereço no Safari.
-2. Compartilhar > Adicionar à Tela de Início.
-
-Observação: navegadores móveis geralmente não permitem instalar PWA corretamente a partir de arquivo local file://. Use HTTPS.
+1. Abra o link no Safari:  
+   https://nascimento-jean.github.io/lacen-al-biomol-calc/
+2. Toque em **Compartilhar**.
+3. Escolha **Adicionar à Tela de Início**.
+4. Confirme em **Adicionar**.

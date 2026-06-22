@@ -11,630 +11,143 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>LACEN-AL BioMol Calc</title>
 <style>
-:root{
-  --bg:#f6f8fb; --card:#ffffff; --text:#111827; --muted:#64748b;
-  --accent:#1d4ed8; --accent2:#0f766e; --border:#dbe3ef; --warn:#fff7ed;
-  --danger:#991b1b; --ok:#065f46;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
-header{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;padding:22px 18px 18px;}
-h1{margin:0;font-size:1.45rem;line-height:1.15}
-header p{margin:7px 0 0;font-size:.9rem;opacity:.95}
+:root{--bg:#f6f8fb;--card:#fff;--text:#111827;--muted:#64748b;--accent:#1d4ed8;--accent2:#0f766e;--border:#dbe3ef;--warn:#fff7ed;--danger:#991b1b}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;padding:22px 18px 18px}
+h1{margin:0;font-size:1.45rem;line-height:1.15} header p{margin:7px 0 0;font-size:.9rem;opacity:.95}
 main{max-width:1060px;margin:0 auto;padding:14px}
-.meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.meta .box{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:8px 10px;font-size:.83rem;margin-top:12px}
-.meta b{display:block;font-size:.74rem;opacity:.85;margin-bottom:2px}
+.meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.meta .box{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:8px 10px;font-size:.83rem;margin-top:12px}.meta b{display:block;font-size:.74rem;opacity:.85;margin-bottom:2px}
 @media(max-width:720px){.meta{grid-template-columns:1fr}.meta .box{margin-top:6px}}
-.global{background:#eef6ff;border:1px solid #bfdbfe;border-radius:16px;padding:14px;margin:12px 0}
-.global label{margin-top:0}
+.global{background:#eef6ff;border:1px solid #bfdbfe;border-radius:16px;padding:14px;margin:12px 0}.global label{margin-top:0}
 .tabs{display:flex;gap:8px;overflow-x:auto;padding:6px 0 12px;position:sticky;top:0;background:var(--bg);z-index:5}
-.tab{border:1px solid var(--border);background:#fff;color:var(--text);padding:10px 12px;border-radius:999px;white-space:nowrap;font-weight:650;font-size:.86rem}
-.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tab{border:1px solid var(--border);background:#fff;color:var(--text);padding:10px 12px;border-radius:999px;white-space:nowrap;font-weight:650;font-size:.86rem}.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 1px 2px rgba(15,23,42,.04)}
-h2{font-size:1.13rem;margin:0 0 6px}
-h3{font-size:1rem;margin:14px 0 8px}
-.hint{font-size:.9rem;color:var(--muted);line-height:1.35;margin:0 0 12px}
-label{display:block;font-size:.9rem;font-weight:650;margin:10px 0 4px}
-input,select,textarea{width:100%;padding:11px 10px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:1rem;color:var(--text)}
-textarea{min-height:70px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-@media(max-width:720px){.grid,.grid3{grid-template-columns:1fr}.tab{font-size:.84rem}}
-.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-button.action{background:var(--accent);border:0;color:#fff;padding:11px 14px;border-radius:10px;font-weight:700}
-button.secondary{background:#fff;border:1px solid var(--border);color:var(--text);padding:11px 14px;border-radius:10px;font-weight:700}
-button.danger{background:#fff;border:1px solid #fecaca;color:var(--danger);padding:11px 14px;border-radius:10px;font-weight:700}
+h2{font-size:1.13rem;margin:0 0 6px}h3{font-size:1rem;margin:14px 0 8px}.hint{font-size:.9rem;color:var(--muted);line-height:1.35;margin:0 0 12px}
+label{display:block;font-size:.9rem;font-weight:650;margin:10px 0 4px}input,select,textarea{width:100%;padding:11px 10px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:1rem;color:var(--text)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}@media(max-width:720px){.grid,.grid3{grid-template-columns:1fr}.tab{font-size:.84rem}}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button.action{background:var(--accent);border:0;color:#fff;padding:11px 14px;border-radius:10px;font-weight:700}button.secondary{background:#fff;border:1px solid var(--border);color:var(--text);padding:11px 14px;border-radius:10px;font-weight:700}button.danger{background:#fff;border:1px solid #fecaca;color:var(--danger);padding:11px 14px;border-radius:10px;font-weight:700}
 .result{background:#f8fafc;border:1px dashed #b6c2d2;border-radius:12px;padding:12px;margin-top:12px;white-space:pre-wrap;line-height:1.45;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem;overflow:auto}
-.note{background:var(--warn);border:1px solid #fed7aa;border-radius:12px;padding:12px;margin-top:12px;font-size:.9rem;line-height:1.35}
-.oknote{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:12px;margin-top:12px;font-size:.9rem;line-height:1.35}
-.hide{display:none}
-footer{color:var(--muted);font-size:.82rem;padding:18px;text-align:center}
-.history-list{font-size:.9rem;line-height:1.35}
-.history-item{padding:9px;border-bottom:1px solid var(--border)}
-.small{font-size:.82rem;color:var(--muted)}
+.note{background:var(--warn);border:1px solid #fed7aa;border-radius:12px;padding:12px;margin-top:12px;font-size:.9rem;line-height:1.35}.hide{display:none}footer{color:var(--muted);font-size:.82rem;padding:18px;text-align:center}.history-item{padding:9px;border-bottom:1px solid var(--border)}.small{font-size:.82rem;color:var(--muted)}
 </style>
 </head>
 <body>
 <header>
-  <h1>LACEN-AL BioMol Calc</h1>
-  <p>Calculadora instalável para rotina de PCR, qPCR, oligonucleotídeos, curvas padrão e diluições.</p>
-  <div class="meta">
-    <div class="box"><b>Laboratório</b>LACEN-AL</div>
-    <div class="box"><b>Desenvolvedor</b>Jean Nascimento</div>
-    <div class="box"><b>Versão</b>1.1</div>
-  </div>
+<h1>LACEN-AL BioMol Calc</h1>
+<p>Calculadora instalável para PCR, qPCR, oligonucleotídeos, Illumina, curvas padrão e diluições.</p>
+<div class="meta"><div class="box"><b>Laboratório</b>LACEN-AL</div><div class="box"><b>Desenvolvedor</b>Jean Nascimento</div><div class="box"><b>Versão</b>1.1</div></div>
 </header>
-
 <main>
-  <div class="global">
-    <label for="moduleName">Módulo informado pelo usuário</label>
-    <input id="moduleName" type="text" placeholder="Ex.: Leishmania spp., DENV-3, PCR convencional para gene X">
-    <p class="hint" style="margin-top:8px;margin-bottom:0">Este campo será usado nos relatórios como: <b>Cálculos para Reações de PCR de {módulo informado}</b>.</p>
-  </div>
+<div class="global">
+<label for="moduleName">Módulo informado pelo usuário</label>
+<input id="moduleName" type="text" placeholder="Ex.: Leishmania spp., DENV-3, Illumina, PCR convencional para gene X">
+<p class="hint" style="margin-top:8px;margin-bottom:0">Este campo será usado nos relatórios como: <b>Cálculos para Reações de PCR de {módulo informado}</b>.</p>
+</div>
+<div class="tabs">
+<button class="tab active" data-target="diluicao">C1V1</button>
+<button class="tab" data-target="qpcr">PCR/qPCR</button>
+<button class="tab" data-target="mix20x">Mix primer-sonda</button>
+<button class="tab" data-target="oligo">Oligo</button>
+<button class="tab" data-target="copias">Cópias</button>
+<button class="tab" data-target="curva">Curva qPCR</button>
+<button class="tab" data-target="serial">Diluição seriada</button>
+<button class="tab" data-target="anelamento">Temp. Anelamento</button>
+<button class="tab" data-target="illumina">Illumina 20 pM</button>
+<button class="tab" data-target="historico">Histórico</button>
+</div>
 
-  <div class="tabs">
-    <button class="tab active" data-target="diluicao">C1V1</button>
-    <button class="tab" data-target="qpcr">PCR/qPCR</button>
-    <button class="tab" data-target="mix20x">Mix primer-sonda</button>
-    <button class="tab" data-target="oligo">Oligo</button>
-    <button class="tab" data-target="copias">Cópias</button>
-    <button class="tab" data-target="curva">Curva qPCR</button>
-    <button class="tab" data-target="serial">Diluição seriada</button>
-    <button class="tab" data-target="anelamento">Temp. Anelamento</button>
-    <button class="tab" data-target="illumina">Illumina 20 pM</button>
-    <button class="tab" data-target="historico">Histórico</button>
-  </div>
+<section id="diluicao" class="card">
+<h2>Diluição — C1V1 = C2V2</h2><p class="hint">Use para diluições de primers, sondas, DNA, RNA, padrões ou reagentes.</p>
+<div class="grid3"><div><label>C1 — concentração do estoque</label><input id="d_c1" type="number" step="any" value="10"></div><div><label>C2 — concentração final desejada</label><input id="d_c2" type="number" step="any" value="0.4"></div><div><label>V2 — volume final</label><input id="d_v2" type="number" step="any" value="20"></div></div>
+<div class="grid"><div><label>Unidade de concentração</label><select id="d_cunit"><option>µM</option><option>nM</option><option>mM</option><option>M</option><option>ng/µL</option><option>cópias/µL</option></select></div><div><label>Unidade de volume</label><select id="d_vunit"><option>µL</option><option>mL</option><option>L</option></select></div></div>
+<div class="btnrow"><button class="action" onclick="calcDil()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_dil" class="result"></div>
+</section>
 
-  <section id="diluicao" class="card">
-    <h2>Diluição — C1V1 = C2V2</h2>
-    <p class="hint">Use para diluições de primers, sondas, DNA, RNA, padrões ou reagentes.</p>
-    <div class="grid3">
-      <div><label>C1 — concentração do estoque</label><input id="d_c1" type="number" step="any" value="10"></div>
-      <div><label>C2 — concentração final desejada</label><input id="d_c2" type="number" step="any" value="0.4"></div>
-      <div><label>V2 — volume final</label><input id="d_v2" type="number" step="any" value="20"></div>
-    </div>
-    <div class="grid">
-      <div><label>Unidade de concentração</label><select id="d_cunit"><option>µM</option><option>nM</option><option>mM</option><option>M</option><option>ng/µL</option><option>cópias/µL</option></select></div>
-      <div><label>Unidade de volume</label><select id="d_vunit"><option>µL</option><option>mL</option><option>L</option></select></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcDil()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_dil" class="result"></div>
-  </section>
+<section id="qpcr" class="card hide">
+<h2>Montagem de PCR/qPCR por reação e por placa</h2><p class="hint">Serve para PCR convencional e qPCR. Em PCR convencional, deixe sonda = 0 ou use apenas primers.</p>
+<div class="grid3"><div><label>Volume final da reação (µL)</label><input id="q_vol" type="number" step="any" value="20"></div><div><label>Número de reações</label><input id="q_n" type="number" step="1" value="24"></div><div><label>Excedente (%)</label><input id="q_extra" type="number" step="any" value="10"></div></div>
+<div class="grid3"><div><label>Master mix</label><select id="q_mm_factor"><option value="2">2x</option><option value="4">4x</option><option value="5">5x</option><option value="1">Não usar master mix</option></select></div><div><label>Volume de DNA/RNA/cDNA por reação (µL)</label><input id="q_template" type="number" step="any" value="5"></div><div><label>Água adicional fixa (µL; opcional)</label><input id="q_fixedwater" type="number" step="any" value="0"></div></div>
+<div class="grid3"><div><label>Estoque primer F/R (µM)</label><input id="q_p_stock" type="number" step="any" value="10"></div><div><label>Primer final desejado (µM)</label><input id="q_p_final" type="number" step="any" value="0.4"></div><div><label>Estoque sonda (µM)</label><input id="q_probe_stock" type="number" step="any" value="10"></div></div>
+<div class="grid3"><div><label>Sonda final desejada (µM; PCR convencional = 0)</label><input id="q_probe_final" type="number" step="any" value="0.2"></div><div><label>Usar mix primer-sonda?</label><select id="q_usemix"><option value="no">Não; adicionar separados</option><option value="yes">Sim; usar mix concentrado</option></select></div><div><label>Fator do mix, se usar</label><input id="q_mixfactor" type="number" step="any" value="20"></div></div>
+<div class="btnrow"><button class="action" onclick="calcQPCR()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_qpcr" class="result"></div>
+</section>
 
-  <section id="qpcr" class="card hide">
-    <h2>Montagem de PCR/qPCR por reação e por placa</h2>
-    <p class="hint">Serve para PCR convencional e qPCR. Em PCR convencional, deixe sonda = 0 ou use apenas primers.</p>
-    <div class="grid3">
-      <div><label>Volume final da reação (µL)</label><input id="q_vol" type="number" step="any" value="20"></div>
-      <div><label>Número de reações</label><input id="q_n" type="number" step="1" value="24"></div>
-      <div><label>Excedente (%)</label><input id="q_extra" type="number" step="any" value="10"></div>
-    </div>
-    <div class="grid3">
-      <div><label>Master mix</label><select id="q_mm_factor"><option value="2">2x</option><option value="4">4x</option><option value="5">5x</option><option value="1">Não usar master mix</option></select></div>
-      <div><label>Volume de DNA/RNA/cDNA por reação (µL)</label><input id="q_template" type="number" step="any" value="5"></div>
-      <div><label>Água adicional fixa (µL; opcional)</label><input id="q_fixedwater" type="number" step="any" value="0"></div>
-    </div>
-    <h3>Primers e sonda</h3>
-    <div class="grid3">
-      <div><label>Estoque primer F/R (µM)</label><input id="q_p_stock" type="number" step="any" value="10"></div>
-      <div><label>Primer final desejado (µM)</label><input id="q_p_final" type="number" step="any" value="0.4"></div>
-      <div><label>Estoque sonda (µM)</label><input id="q_probe_stock" type="number" step="any" value="10"></div>
-    </div>
-    <div class="grid3">
-      <div><label>Sonda final desejada (µM; PCR convencional = 0)</label><input id="q_probe_final" type="number" step="any" value="0.2"></div>
-      <div><label>Usar mix primer-sonda?</label><select id="q_usemix"><option value="no">Não; adicionar separados</option><option value="yes">Sim; usar mix concentrado</option></select></div>
-      <div><label>Fator do mix, se usar</label><input id="q_mixfactor" type="number" step="any" value="20"></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcQPCR()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_qpcr" class="result"></div>
-    <div class="note">Para PCR convencional, este módulo calcula volumes. Para otimização térmica, use o módulo “Temp. Anelamento”.</div>
-  </section>
+<section id="mix20x" class="card hide">
+<h2>Primer-probe mix concentrado</h2><p class="hint">Calcula o preparo de mix concentrado, como mix 20x de qPCR a partir de estoques 100 µM.</p>
+<div class="grid3"><div><label>Fator do mix</label><input id="m_factor" type="number" step="any" value="20"></div><div><label>Volume final do mix (µL)</label><input id="m_vol" type="number" step="any" value="100"></div><div><label>Concentração dos estoques (µM)</label><input id="m_stock" type="number" step="any" value="100"></div></div>
+<div class="grid3"><div><label>Primer F final na reação (µM)</label><input id="m_pf" type="number" step="any" value="0.4"></div><div><label>Primer R final na reação (µM)</label><input id="m_pr" type="number" step="any" value="0.4"></div><div><label>Sonda final na reação (µM)</label><input id="m_probe" type="number" step="any" value="0.2"></div></div>
+<div class="btnrow"><button class="action" onclick="calcMix()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_mix" class="result"></div>
+</section>
 
-  <section id="mix20x" class="card hide">
-    <h2>Primer-probe mix concentrado</h2>
-    <p class="hint">Calcula o preparo de mix concentrado, como mix 20x de qPCR a partir de estoques 100 µM.</p>
-    <div class="grid3">
-      <div><label>Fator do mix</label><input id="m_factor" type="number" step="any" value="20"></div>
-      <div><label>Volume final do mix (µL)</label><input id="m_vol" type="number" step="any" value="100"></div>
-      <div><label>Concentração dos estoques (µM)</label><input id="m_stock" type="number" step="any" value="100"></div>
-    </div>
-    <div class="grid3">
-      <div><label>Primer F final na reação (µM)</label><input id="m_pf" type="number" step="any" value="0.4"></div>
-      <div><label>Primer R final na reação (µM)</label><input id="m_pr" type="number" step="any" value="0.4"></div>
-      <div><label>Sonda final na reação (µM)</label><input id="m_probe" type="number" step="any" value="0.2"></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcMix()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_mix" class="result"></div>
-  </section>
+<section id="oligo" class="card hide">
+<h2>Reconstituição de oligonucleotídeo</h2><div class="grid3"><div><label>Quantidade do oligo</label><input id="o_amount" type="number" step="any" value="43"></div><div><label>Unidade</label><select id="o_unit"><option value="nmol">nmol</option><option value="pmol">pmol</option></select></div><div><label>Concentração desejada (µM)</label><input id="o_conc" type="number" step="any" value="100"></div></div>
+<div class="btnrow"><button class="action" onclick="calcOligo()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_oligo" class="result"></div>
+</section>
 
-  <section id="oligo" class="card hide">
-    <h2>Reconstituição de oligonucleotídeo</h2>
-    <p class="hint">Calcula o volume para reconstituir primer ou sonda liofilizado em uma concentração desejada.</p>
-    <div class="grid3">
-      <div><label>Quantidade do oligo</label><input id="o_amount" type="number" step="any" value="43"></div>
-      <div><label>Unidade</label><select id="o_unit"><option value="nmol">nmol</option><option value="pmol">pmol</option></select></div>
-      <div><label>Concentração desejada (µM)</label><input id="o_conc" type="number" step="any" value="100"></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcOligo()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_oligo" class="result"></div>
-  </section>
+<section id="copias" class="card hide">
+<h2>Número de cópias por µL</h2><div class="grid3"><div><label>Concentração</label><input id="c_mass" type="number" step="any" value="1"></div><div><label>Unidade</label><select id="c_unit"><option value="ng">ng/µL</option><option value="pg">pg/µL</option><option value="fg">fg/µL</option></select></div><div><label>Tamanho do alvo/genoma</label><input id="c_len" type="number" step="any" value="10000"></div></div>
+<div class="grid"><div><label>Tipo de molécula</label><select id="c_type"><option value="660">dsDNA, 660 g/mol/bp</option><option value="330">ssDNA, 330 g/mol/nt</option><option value="340">RNA, 340 g/mol/nt</option></select></div><div><label>Unidade do tamanho</label><select><option>bp/nt</option></select></div></div>
+<div class="btnrow"><button class="action" onclick="calcCopies()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_copies" class="result"></div>
+</section>
 
-  <section id="copias" class="card hide">
-    <h2>Número de cópias por µL</h2>
-    <p class="hint">Converte concentração em massa para cópias/µL usando massa molar aproximada.</p>
-    <div class="grid3">
-      <div><label>Concentração</label><input id="c_mass" type="number" step="any" value="1"></div>
-      <div><label>Unidade</label><select id="c_unit"><option value="ng">ng/µL</option><option value="pg">pg/µL</option><option value="fg">fg/µL</option></select></div>
-      <div><label>Tamanho do alvo/genoma</label><input id="c_len" type="number" step="any" value="10000"></div>
-    </div>
-    <div class="grid">
-      <div><label>Tipo de molécula</label><select id="c_type"><option value="660">dsDNA, 660 g/mol/bp</option><option value="330">ssDNA, 330 g/mol/nt</option><option value="340">RNA, 340 g/mol/nt</option></select></div>
-      <div><label>Unidade do tamanho</label><select><option>bp/nt</option></select></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcCopies()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_copies" class="result"></div>
-  </section>
+<section id="curva" class="card hide">
+<h2>Curva padrão qPCR</h2><div class="grid3"><div><label>Slope</label><input id="s_slope" type="number" step="any" value="-3.32"></div><div><label>Intercepto (opcional)</label><input id="s_intercept" type="number" step="any"></div><div><label>R² (opcional)</label><input id="s_r2" type="number" step="any" value="0.99"></div></div>
+<div class="btnrow"><button class="action" onclick="calcStd()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_std" class="result"></div>
+</section>
 
-  <section id="curva" class="card hide">
-    <h2>Curva padrão qPCR</h2>
-    <p class="hint">Calcula eficiência a partir do slope da regressão Ct × log10(concentração/cópias).</p>
-    <div class="grid3">
-      <div><label>Slope</label><input id="s_slope" type="number" step="any" value="-3.32"></div>
-      <div><label>Intercepto (opcional)</label><input id="s_intercept" type="number" step="any"></div>
-      <div><label>R² (opcional)</label><input id="s_r2" type="number" step="any" value="0.99"></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcStd()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_std" class="result"></div>
-  </section>
+<section id="serial" class="card hide">
+<h2>Diluição seriada</h2><div class="grid3"><div><label>Concentração inicial</label><input id="ser_start" type="number" step="any" value="1000000"></div><div><label>Fator de diluição</label><input id="ser_factor" type="number" step="any" value="10"></div><div><label>Número de pontos</label><input id="ser_n" type="number" step="1" value="6"></div></div>
+<div class="grid3"><div><label>Volume final por ponto (µL)</label><input id="ser_vfinal" type="number" step="any" value="100"></div><div><label>Volume transferido (µL)</label><input id="ser_vtransfer" type="number" step="any" value="10"></div><div><label>Unidade da concentração</label><input id="ser_unit" type="text" value="cópias/µL"></div></div>
+<div class="btnrow"><button class="action" onclick="calcSerial()">Gerar tabela</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_serial" class="result"></div>
+</section>
 
-  <section id="serial" class="card hide">
-    <h2>Diluição seriada</h2>
-    <p class="hint">Gera uma série de diluições para curva padrão, titulação ou ensaios de LOD.</p>
-    <div class="grid3">
-      <div><label>Concentração inicial</label><input id="ser_start" type="number" step="any" value="1000000"></div>
-      <div><label>Fator de diluição</label><input id="ser_factor" type="number" step="any" value="10"></div>
-      <div><label>Número de pontos</label><input id="ser_n" type="number" step="1" value="6"></div>
-    </div>
-    <div class="grid3">
-      <div><label>Volume final por ponto (µL)</label><input id="ser_vfinal" type="number" step="any" value="100"></div>
-      <div><label>Volume transferido (µL)</label><input id="ser_vtransfer" type="number" step="any" value="10"></div>
-      <div><label>Unidade da concentração</label><input id="ser_unit" type="text" value="cópias/µL"></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcSerial()">Gerar tabela</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_serial" class="result"></div>
-  </section>
+<section id="anelamento" class="card hide">
+<h2>Cálculo de Temperatura de Anelamento</h2><p class="hint">Sugere temperaturas iniciais e gradiente de teste com base no Tm dos primers.</p>
+<div class="grid3"><div><label>Tm primer Forward (°C)</label><input id="a_tm_f" type="number" step="any" value="60"></div><div><label>Tm primer Reverse (°C)</label><input id="a_tm_r" type="number" step="any" value="62"></div><div><label>Número de pontos no gradiente</label><input id="a_points" type="number" step="1" value="6"></div></div>
+<div class="grid3"><div><label>Tipo de PCR</label><select id="a_type"><option value="convencional">PCR convencional/Taq geral</option><option value="alta_fidelidade">Alta fidelidade/qPCR</option></select></div><div><label>Faixa inferior relativa ao menor Tm (°C)</label><input id="a_low" type="number" step="any" value="-8"></div><div><label>Faixa superior relativa ao menor Tm (°C)</label><input id="a_high" type="number" step="any" value="0"></div></div>
+<div class="btnrow"><button class="action" onclick="calcAnneal()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_anneal" class="result"></div>
+</section>
 
-  <section id="anelamento" class="card hide">
-    <h2>Cálculo de Temperatura de Anelamento</h2>
-    <p class="hint">Sugere temperaturas iniciais e gradiente de teste com base no Tm dos primers. A condição ótima deve ser confirmada empiricamente.</p>
-    <div class="grid3">
-      <div><label>Tm primer Forward (°C)</label><input id="a_tm_f" type="number" step="any" value="60"></div>
-      <div><label>Tm primer Reverse (°C)</label><input id="a_tm_r" type="number" step="any" value="62"></div>
-      <div><label>Número de pontos no gradiente</label><input id="a_points" type="number" step="1" value="6"></div>
-    </div>
-    <div class="grid3">
-      <div><label>Tipo de PCR</label><select id="a_type"><option value="convencional">PCR convencional/Taq geral</option><option value="alta_fidelidade">Alta fidelidade/qPCR: testar mais próximo do Tm</option></select></div>
-      <div><label>Faixa inferior relativa ao menor Tm (°C)</label><input id="a_low" type="number" step="any" value="-8"></div>
-      <div><label>Faixa superior relativa ao menor Tm (°C)</label><input id="a_high" type="number" step="any" value="0"></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcAnneal()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_anneal" class="result"></div>
-    <div class="note">Regra prática geral: iniciar perto de 3–5 °C abaixo do menor Tm e validar por PCR em gradiente. Se houver bandas inespecíficas, testar temperaturas mais altas; se houver baixa amplificação, testar temperaturas mais baixas.</div>
-  </section>
+<section id="illumina" class="card hide">
+<h2>Normalização/Desnaturação Illumina — biblioteca a 20 pM</h2>
+<p class="hint">Calcula o volume de biblioteca, NaOH 0,2N e tampão HT1/HP3 para preparar biblioteca desnaturada. Modelo padrão: 1000 µL finais a 20 pM, com 5 µL fixos de NaOH 0,2N.</p>
+<div class="grid3"><div><label>Concentração atual do lote (nM)</label><input id="i_conc" type="number" step="any" value="4"></div><div><label>Concentração final desejada (pM)</label><input id="i_target" type="number" step="any" value="20"></div><div><label>Volume final desejado (µL)</label><input id="i_finalvol" type="number" step="any" value="1000"></div></div>
+<div class="grid3"><div><label>Volume de NaOH 0,2N (µL)</label><input id="i_naoh" type="number" step="any" value="5"></div><div><label>Tampão de hibridização</label><select id="i_buffer"><option>HT1</option><option>HP3</option><option>HT1/HP3</option></select></div><div><label>Gerar tabela de bancada?</label><select id="i_table"><option value="yes">Sim</option><option value="no">Não</option></select></div></div>
+<div class="btnrow"><button class="action" onclick="calcIllumina()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div><div id="res_illumina" class="result"></div>
+<div class="note">Atenção: este módulo adapta o cálculo quando o lote não atinge 4 nM. A concentração de carga final ainda deve seguir o manual específico do equipamento, kit e run setup utilizados.</div>
+</section>
 
-
-  <section id="illumina" class="card hide">
-    <h2>Normalização/Desnaturação Illumina — biblioteca a 20 pM</h2>
-    <p class="hint">Calcula o volume de biblioteca, NaOH 0,2N e tampão HT1/HP3 para preparar biblioteca desnaturada. Modelo padrão: 1000 µL finais a 20 pM, com 5 µL fixos de NaOH 0,2N.</p>
-    <div class="grid3">
-      <div><label>Concentração atual do lote (nM)</label><input id="i_conc" type="number" step="any" value="4"></div>
-      <div><label>Concentração final desejada (pM)</label><input id="i_target" type="number" step="any" value="20"></div>
-      <div><label>Volume final desejado (µL)</label><input id="i_finalvol" type="number" step="any" value="1000"></div>
-    </div>
-    <div class="grid3">
-      <div><label>Volume de NaOH 0,2N (µL)</label><input id="i_naoh" type="number" step="any" value="5"></div>
-      <div><label>Tampão de hibridização</label><select id="i_buffer"><option>HT1</option><option>HP3</option><option>HT1/HP3</option></select></div>
-      <div><label>Gerar tabela de bancada?</label><select id="i_table"><option value="yes">Sim</option><option value="no">Não</option></select></div>
-    </div>
-    <div class="btnrow"><button class="action" onclick="calcIllumina()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
-    <div id="res_illumina" class="result"></div>
-    <div class="note">Atenção: este módulo adapta o cálculo quando o lote não atinge 4 nM. A concentração de carga final ainda deve seguir o manual específico do equipamento, kit e run setup utilizados.</div>
-  </section>
-
-  <section id="historico" class="card hide">
-    <h2>Histórico local de cálculos</h2>
-    <p class="hint">O histórico fica salvo apenas no navegador/dispositivo usado.</p>
-    <div class="btnrow"><button class="secondary" onclick="renderHistory()">Atualizar</button><button class="secondary" onclick="exportExcel(true)">Exportar histórico para Excel</button><button class="secondary" onclick="exportPDF(true)">Exportar histórico em PDF</button><button class="danger" onclick="clearHistory()">Limpar histórico</button></div>
-    <div id="historyList" class="history-list"></div>
-  </section>
+<section id="historico" class="card hide">
+<h2>Histórico local de cálculos</h2><p class="hint">O histórico fica salvo apenas no navegador/dispositivo usado.</p>
+<div class="btnrow"><button class="secondary" onclick="renderHistory()">Atualizar</button><button class="secondary" onclick="exportExcel(true)">Exportar histórico para Excel</button><button class="secondary" onclick="exportPDF(true)">Exportar histórico em PDF</button><button class="danger" onclick="clearHistory()">Limpar histórico</button></div><div id="historyList" class="history-list"></div>
+</section>
 </main>
-
 <footer>LACEN-AL BioMol Calc • Desenvolvedor: Jean Nascimento • Versão 1.1</footer>
-
 <script>
-const APP = {lab:"LACEN-AL", developer:"Jean Nascimento", version:"1.1"};
-let lastRecord = null;
-let history = JSON.parse(localStorage.getItem("biomol_history_v1") || "[]");
-
-function val(id){ return parseFloat(document.getElementById(id).value); }
-function str(id){ return document.getElementById(id).value || ""; }
-function fmt(x){
-  if(!isFinite(x)) return "erro";
-  if(Math.abs(x)>=100000 || (Math.abs(x)>0 && Math.abs(x)<0.001)) return x.toExponential(4);
-  return (Math.round(x*10000)/10000).toString().replace(".", ",");
-}
-function fmtDot(x){
-  if(!isFinite(x)) return "erro";
-  if(Math.abs(x)>=100000 || (Math.abs(x)>0 && Math.abs(x)<0.001)) return x.toExponential(4);
-  return Math.round(x*10000)/10000;
-}
-function moduleTitle(){
-  const m = str("moduleName").trim() || "módulo não informado";
-  return `Cálculos para Reações de PCR de ${m}`;
-}
-function escapeHTML(s){
-  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-}
-function nowBR(){
-  return new Date().toLocaleString("pt-BR");
-}
-function setResult(elementId, calcName, text, inputObj){
-  document.getElementById(elementId).innerText = text;
-  lastRecord = {
-    date: nowBR(),
-    lab: APP.lab,
-    developer: APP.developer,
-    version: APP.version,
-    module: str("moduleName").trim(),
-    header: moduleTitle(),
-    calculator: calcName,
-    inputs: inputObj || {},
-    result: text
-  };
-  history.unshift(lastRecord);
-  history = history.slice(0, 100);
-  localStorage.setItem("biomol_history_v1", JSON.stringify(history));
-}
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('section.card').forEach(s=>s.classList.add('hide'));
-    document.getElementById(btn.dataset.target).classList.remove('hide');
-    if(btn.dataset.target === "historico") renderHistory();
-  });
-});
-
-function calcDil(){
-  const c1=val('d_c1'), c2=val('d_c2'), v2=val('d_v2');
-  const v1 = c2*v2/c1, dil = v2-v1;
-  const cu=str('d_cunit'), vu=str('d_vunit');
-  const text =
-`Fórmula: C1 × V1 = C2 × V2
-V1 = (C2 × V2) / C1
-
-C1 = ${fmt(c1)} ${cu}
-C2 = ${fmt(c2)} ${cu}
-V2 = ${fmt(v2)} ${vu}
-
-Volume do estoque, V1 = ${fmt(v1)} ${vu}
-Volume de diluente = ${fmt(dil)} ${vu}
-
-Montagem:
-${fmt(v1)} ${vu} do estoque + ${fmt(dil)} ${vu} de diluente = ${fmt(v2)} ${vu}`;
-  setResult("res_dil", "Diluição C1V1", text, {C1:c1,C2:c2,V2:v2,unidade_conc:cu,unidade_vol:vu});
-}
-
-function calcQPCR(){
-  const vol=val('q_vol'), n=val('q_n'), extra=val('q_extra');
-  const mult=n*(1+extra/100);
-  const mmFactor=val('q_mm_factor');
-  const template=val('q_template'), fixedWater=val('q_fixedwater');
-  const usemix=str('q_usemix');
-  let lines=[];
-  lines.push(`Reações: ${fmt(n)} + ${fmt(extra)}% excedente = ${fmt(mult)} reações equivalentes`);
-  lines.push(`Volume final por reação: ${fmt(vol)} µL`);
-  const mm = mmFactor === 1 ? 0 : vol/mmFactor;
-  lines.push(`Master mix ${mmFactor}x: ${fmt(mm)} µL/reação | total ${fmt(mm*mult)} µL`);
-  lines.push(`DNA/RNA/cDNA: ${fmt(template)} µL/reação | total ${fmt(template*mult)} µL`);
-  if(usemix==='yes'){
-    const factor=val('q_mixfactor');
-    const mixVol=vol/factor;
-    const water=vol-mm-template-fixedWater-mixVol;
-    lines.push(`Primer/sonda mix ${fmt(factor)}x: ${fmt(mixVol)} µL/reação | total ${fmt(mixVol*mult)} µL`);
-    lines.push(`Água: ${fmt(water)} µL/reação | total ${fmt(water*mult)} µL`);
-  } else {
-    const pStock=val('q_p_stock'), pFinal=val('q_p_final');
-    const probeStock=val('q_probe_stock'), probeFinal=val('q_probe_final');
-    const pf=pFinal*vol/pStock;
-    const pr=pf;
-    const probe=probeFinal > 0 ? probeFinal*vol/probeStock : 0;
-    const water=vol-mm-template-fixedWater-pf-pr-probe;
-    lines.push(`Primer F: ${fmt(pf)} µL/reação | total ${fmt(pf*mult)} µL`);
-    lines.push(`Primer R: ${fmt(pr)} µL/reação | total ${fmt(pr*mult)} µL`);
-    lines.push(`Sonda: ${fmt(probe)} µL/reação | total ${fmt(probe*mult)} µL`);
-    lines.push(`Água: ${fmt(water)} µL/reação | total ${fmt(water*mult)} µL`);
-  }
-  if(fixedWater>0) lines.push(`Água adicional fixa: ${fmt(fixedWater)} µL/reação | total ${fmt(fixedWater*mult)} µL`);
-  lines.push(`\nConferência: os componentes devem somar ${fmt(vol)} µL por reação.`);
-  if(lines.join("\n").includes("Água: -")) lines.push("\nATENÇÃO: volume de água negativo. Revise volumes/concentrações.");
-  setResult("res_qpcr", "Montagem de PCR/qPCR", lines.join("\n"), {volume_reacao:vol,reacoes:n,excedente:extra,master_mix:mmFactor,template:template});
-}
-
-function calcMix(){
-  const factor=val('m_factor'), v=val('m_vol'), stock=val('m_stock');
-  const pf=val('m_pf'), pr=val('m_pr'), probe=val('m_probe');
-  const pfMix=pf*factor, prMix=pr*factor, probeMix=probe*factor;
-  const vpf=pfMix*v/stock, vpr=prMix*v/stock, vprobe=probeMix*v/stock;
-  const water=v-vpf-vpr-vprobe;
-  const text =
-`Concentração desejada no mix ${fmt(factor)}x:
-Primer F = ${fmt(pfMix)} µM
-Primer R = ${fmt(prMix)} µM
-Sonda = ${fmt(probeMix)} µM
-
-Para ${fmt(v)} µL de mix a partir de estoque ${fmt(stock)} µM:
-Primer F: ${fmt(vpf)} µL
-Primer R: ${fmt(vpr)} µL
-Sonda: ${fmt(vprobe)} µL
-Água/TE baixo EDTA: ${fmt(water)} µL
-
-Em reação de 20 µL, usar ${fmt(20/factor)} µL do mix.`;
-  setResult("res_mix", "Mix primer-sonda concentrado", text, {fator:factor, volume_mix:v, estoque:stock});
-}
-
-function calcOligo(){
-  let amount=val('o_amount');
-  const unit=str('o_unit'), conc=val('o_conc');
-  if(unit==='pmol') amount=amount/1000;
-  const volul=amount/conc*1000;
-  const text =
-`Quantidade = ${fmt(amount)} nmol
-Concentração desejada = ${fmt(conc)} µM
-
-Volume para reconstituição = ${fmt(volul)} µL
-
-Relação usada:
-µM = nmol/mL
-V(mL) = nmol / µM
-V(µL) = (nmol / µM) × 1000`;
-  setResult("res_oligo", "Reconstituição de oligonucleotídeo", text, {quantidade_nmol:amount, concentracao_uM:conc});
-}
-
-function calcCopies(){
-  const mass=val('c_mass'), unit=str('c_unit'), len=val('c_len'), mw=val('c_type');
-  const factor = unit==='ng' ? 1e-9 : unit==='pg' ? 1e-12 : 1e-15;
-  const copies = (mass*factor*6.02214076e23)/(len*mw);
-  const text =
-`Concentração = ${fmt(mass)} ${unit}/µL
-Tamanho = ${fmt(len)} bp/nt
-Massa molar aproximada = ${fmt(mw)} g/mol por bp/nt
-
-Cópias/µL = ${fmt(copies)}
-log10(cópias/µL) = ${fmt(Math.log10(copies))}
-
-Fórmula:
-cópias/µL = [massa(g/µL) × 6,022×10²³] / [tamanho × massa molar]`;
-  setResult("res_copies", "Número de cópias por µL", text, {massa:mass, unidade:unit, tamanho:len, tipo_massa_molar:mw});
-}
-
-function calcStd(){
-  const slope=val('s_slope'), intercept=str('s_intercept'), r2=str('s_r2');
-  const eff=(Math.pow(10, -1/slope)-1)*100;
-  let text = `Slope = ${fmt(slope)}\nEficiência = ${fmt(eff)}%\n`;
-  if(intercept !== "") text += `Intercepto = ${intercept}\n`;
-  if(r2 !== "") text += `R² = ${r2}\n`;
-  text += `\nInterpretação usual:
-90–110%: faixa geralmente aceitável para qPCR
-Slope ideal aproximado: -3,32
-R² desejável: ≥0,98 ou ≥0,99, conforme critério do laboratório/estudo`;
-  setResult("res_std", "Curva padrão qPCR", text, {slope:slope, intercepto:intercept, r2:r2});
-}
-
-function calcSerial(){
-  const start=val('ser_start'), factor=val('ser_factor'), n=parseInt(val('ser_n'));
-  const vf=val('ser_vfinal'), vt=val('ser_vtransfer'), unit=str('ser_unit');
-  const diluent=vf-vt;
-  let lines=[];
-  lines.push(`Ponto\tDiluição\tConcentração (${unit})\tPreparo sugerido`);
-  for(let i=0;i<n;i++){
-    const conc=start/Math.pow(factor,i);
-    const dil = i===0 ? "estoque" : `1:${fmtDot(Math.pow(factor,i))}`;
-    const prep = i===0 ? "usar estoque/padrão inicial" : `${fmt(vt)} µL do ponto anterior + ${fmt(diluent)} µL diluente`;
-    lines.push(`${i+1}\t${dil}\t${fmt(conc)}\t${prep}`);
-  }
-  setResult("res_serial", "Diluição seriada", lines.join("\n"), {concentracao_inicial:start, fator:factor, pontos:n, volume_final:vf});
-}
-
-function linspace(a,b,n){
-  if(n<=1) return [a];
-  const step=(b-a)/(n-1);
-  return Array.from({length:n}, (_,i)=>a+i*step);
-}
-function calcAnneal(){
-  const tmF=val('a_tm_f'), tmR=val('a_tm_r'), points=parseInt(val('a_points'));
-  const lowOff=val('a_low'), highOff=val('a_high'), type=str('a_type');
-  const tmLow=Math.min(tmF,tmR), tmHigh=Math.max(tmF,tmR), delta=Math.abs(tmF-tmR);
-  let initial, rangeLow, rangeHigh;
-  if(type==="convencional"){
-    initial = tmLow - 5;
-    rangeLow = tmLow + lowOff;
-    rangeHigh = tmLow + highOff;
-  } else {
-    initial = tmLow - 3;
-    rangeLow = tmLow - 5;
-    rangeHigh = tmLow + 2;
-  }
-  let temps = linspace(rangeLow, rangeHigh, Math.max(points,2)).map(x=>fmt(x)).join(" °C | ") + " °C";
-  let alerts=[];
-  if(delta>5) alerts.push("ATENÇÃO: diferença entre Tm dos primers >5 °C. Considere redesenho dos primers ou gradiente mais amplo.");
-  if(tmLow<50) alerts.push("ATENÇÃO: menor Tm <50 °C. Pode haver baixa especificidade; avaliar redesenho/otimização.");
-  if(tmHigh>75) alerts.push("ATENÇÃO: Tm elevado. Verifique método de cálculo, conteúdo GC e compatibilidade com a polimerase.");
-  const text =
-`Tm Forward = ${fmt(tmF)} °C
-Tm Reverse = ${fmt(tmR)} °C
-Menor Tm = ${fmt(tmLow)} °C
-Maior Tm = ${fmt(tmHigh)} °C
-ΔTm = ${fmt(delta)} °C
-
-Sugestão inicial de temperatura de anelamento:
-Ta inicial ≈ ${fmt(initial)} °C
-
-Gradiente sugerido para teste:
-${temps}
-
-Critério usado:
-${type==="convencional" ? "PCR convencional/Taq geral: iniciar em torno de 3–5 °C abaixo do menor Tm; testar gradiente experimental." : "Alta fidelidade/qPCR: testar temperaturas mais próximas do menor Tm, conforme enzima/master mix."}
-
-Interpretação prática:
-- Bandas inespecíficas ou primer-dimer: testar Ta mais alta.
-- Ausência ou baixa intensidade de banda: testar Ta mais baixa.
-- Para diagnóstico, escolher condição com melhor especificidade, eficiência e reprodutibilidade.
-
-${alerts.length ? alerts.join("\n") : "Sem alertas críticos com os valores informados."}`;
-  setResult("res_anneal", "Cálculo de temperatura de anelamento", text, {Tm_forward:tmF, Tm_reverse:tmR, delta_Tm:delta, tipo:type, pontos:points});
-}
-
-
-function calcIllumina(){
-  const conc=val('i_conc'), target=val('i_target'), finalVol=val('i_finalvol'), naoh=val('i_naoh');
-  const bufferName=str('i_buffer');
-  const targetNm = target/1000;
-  const vBio = (targetNm * finalVol) / conc;
-  const vBuffer = finalVol - (vBio + naoh);
-  let lines=[];
-  lines.push(`Objetivo: preparar ${fmt(finalVol)} µL de biblioteca desnaturada a ${fmt(target)} pM`);
-  lines.push(`Concentração atual do lote: ${fmt(conc)} nM`);
-  lines.push(`Tampão: ${bufferName}`);
-  lines.push("");
-  lines.push("Fórmula universal:");
-  lines.push("V_biblioteca = (Concentração final em nM × Volume final) / Concentração atual em nM");
-  lines.push(`V_biblioteca = (${fmt(targetNm)} nM × ${fmt(finalVol)} µL) / ${fmt(conc)} nM`);
-  lines.push("");
-  lines.push(`Volume de biblioteca: ${fmt(vBio)} µL`);
-  lines.push(`Volume de NaOH 0,2N: ${fmt(naoh)} µL`);
-  lines.push(`Volume de tampão ${bufferName}: ${fmt(vBuffer)} µL`);
-  lines.push("");
-  lines.push("Instruções de bancada:");
-  lines.push(`1. Em tubo livre de nuclease, adicionar ${fmt(vBio)} µL da biblioteca.`);
-  lines.push(`2. Adicionar exatamente ${fmt(naoh)} µL de NaOH 0,2N recentemente diluído.`);
-  lines.push("3. Misturar por inversão ou vórtex rápido e dar pulso no minicen.");
-  lines.push("4. Incubar por 5 minutos em temperatura ambiente para desnaturação.");
-  lines.push(`5. Adicionar imediatamente ${fmt(vBuffer)} µL de tampão ${bufferName} para neutralização.`);
-  lines.push(`6. Homogeneizar. O tubo final terá ${fmt(finalVol)} µL a ${fmt(target)} pM.`);
-  lines.push("7. Seguir as diluições finais do manual do equipamento para atingir a concentração de carga.");
-  lines.push("");
-  if(conc < 1){
-    lines.push("ATENÇÃO: concentração abaixo de 1,0 nM. O volume de biblioteca será alto e pode afetar a eficiência da desnaturação. Considerar concentrar a amostra, por exemplo com SpeedVac ou esferas AMPure XP, antes do preparo.");
-  } else if(conc < 2){
-    lines.push("Atenção: concentração baixa. Conferir se o volume de biblioteca é compatível com o protocolo e com o desempenho esperado da desnaturação.");
-  }
-  if(vBuffer < 0){
-    lines.push("ERRO: o volume de tampão ficou negativo. Revise concentração atual, volume final, concentração final ou volume de NaOH.");
-  }
-  if(str('i_table') === "yes"){
-    const concs=[4.0,3.5,3.0,2.5,2.0,1.5,1.0];
-    lines.push("");
-    lines.push("Tabela rápida de bancada para 1000 µL finais a 20 pM e 5 µL NaOH:");
-    lines.push("Conc. atual (nM)\tVol. biblioteca (µL)\tVol. NaOH 0,2N (µL)\tVol. tampão (µL)");
-    for(const c of concs){
-      const vb=(0.020*1000)/c;
-      const vt=1000-(vb+5);
-      lines.push(`${fmt(c)}\t${fmt(vb)}\t${fmt(5)}\t${fmt(vt)}`);
-    }
-  }
-  setResult("res_illumina", "Normalização/Desnaturação Illumina 20 pM", lines.join("\\n"), {concentracao_lote_nM:conc, concentracao_final_pM:target, volume_final_uL:finalVol, NaOH_uL:naoh, tampao:bufferName});
-}
-
-
-function buildReport(records){
-  const list = Array.isArray(records) ? records : [records];
-  const title = list[0]?.header || moduleTitle();
-  let body = "";
-  for(const r of list){
-    body += `<h2>${escapeHTML(r.calculator)}</h2>
-    <table>
-      <tr><th>Data/hora</th><td>${escapeHTML(r.date)}</td></tr>
-      <tr><th>Módulo informado</th><td>${escapeHTML(r.module || "módulo não informado")}</td></tr>
-      <tr><th>Aplicativo</th><td>LACEN-AL BioMol Calc v${APP.version}</td></tr>
-    </table>
-    <h3>Resultado</h3>
-    <pre>${escapeHTML(r.result)}</pre>`;
-  }
-  return `<!doctype html><html><head><meta charset="utf-8"><title>${escapeHTML(title)}</title>
-  <style>
-    body{font-family:Arial,sans-serif;color:#111827;padding:24px}
-    h1{color:#1d4ed8;font-size:22px;margin-bottom:4px}
-    h2{font-size:17px;margin-top:22px;border-top:1px solid #dbe3ef;padding-top:12px}
-    .sub{color:#64748b;font-size:12px;margin-bottom:18px}
-    table{border-collapse:collapse;width:100%;margin:8px 0 12px}
-    th,td{border:1px solid #dbe3ef;padding:7px;text-align:left;font-size:12px}
-    th{width:28%;background:#f1f5f9}
-    pre{white-space:pre-wrap;background:#f8fafc;border:1px solid #dbe3ef;border-radius:8px;padding:12px;font-size:12px;line-height:1.45}
-    footer{margin-top:24px;color:#64748b;font-size:11px}
-  </style></head><body>
-  <h1>${escapeHTML(title)}</h1>
-  <div class="sub">Laboratório: ${APP.lab} • Desenvolvedor: ${APP.developer} • Versão: ${APP.version}</div>
-  ${body}
-  <footer>Relatório gerado automaticamente pelo LACEN-AL BioMol Calc.</footer>
-  </body></html>`;
-}
-function exportPDF(all=false){
-  let records = all ? history.slice().reverse() : (lastRecord ? [lastRecord] : null);
-  if(!records || records.length===0){ alert("Nenhum cálculo disponível para exportar."); return; }
-  const w = window.open("", "_blank");
-  w.document.open();
-  w.document.write(buildReport(records));
-  w.document.close();
-  setTimeout(()=>{ w.focus(); w.print(); }, 400);
-}
-function exportExcel(all=false){
-  let records = all ? history.slice().reverse() : (lastRecord ? [lastRecord] : null);
-  if(!records || records.length===0){ alert("Nenhum cálculo disponível para exportar."); return; }
-  const title = records[0].header || moduleTitle();
-  let rows = `<tr><th colspan="7">${escapeHTML(title)}</th></tr>
-  <tr><th>Laboratório</th><td colspan="6">${APP.lab}</td></tr>
-  <tr><th>Desenvolvedor</th><td colspan="6">${APP.developer}</td></tr>
-  <tr><th>Versão</th><td colspan="6">${APP.version}</td></tr>
-  <tr><th>Data/hora</th><th>Módulo informado</th><th>Calculadora</th><th>Resultado</th><th>Aplicativo</th><th>Laboratório</th><th>Desenvolvedor</th></tr>`;
-  for(const r of records){
-    rows += `<tr>
-      <td>${escapeHTML(r.date)}</td>
-      <td>${escapeHTML(r.module || "módulo não informado")}</td>
-      <td>${escapeHTML(r.calculator)}</td>
-      <td style="white-space:pre-wrap">${escapeHTML(r.result)}</td>
-      <td>LACEN-AL BioMol Calc v${APP.version}</td>
-      <td>${APP.lab}</td>
-      <td>${APP.developer}</td>
-    </tr>`;
-  }
-  const html = `<!doctype html><html><head><meta charset="utf-8"></head><body><table border="1">${rows}</table></body></html>`;
-  const blob = new Blob(["\ufeff", html], {type:"application/vnd.ms-excel;charset=utf-8"});
-  const a = document.createElement("a");
-  const safeModule = (records[0].module || "modulo").replace(/[^a-z0-9_-]+/gi,"_");
-  a.href = URL.createObjectURL(blob);
-  a.download = `LACEN-AL_BioMolCalc_${safeModule}_${new Date().toISOString().slice(0,10)}.xls`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(a.href);
-}
-function renderHistory(){
-  const el=document.getElementById("historyList");
-  if(history.length===0){ el.innerHTML = `<p class="small">Nenhum cálculo salvo ainda.</p>`; return; }
-  el.innerHTML = history.map((r,i)=>`<div class="history-item"><b>${i+1}. ${escapeHTML(r.calculator)}</b><br><span class="small">${escapeHTML(r.date)} • ${escapeHTML(r.module || "módulo não informado")}</span><pre class="small">${escapeHTML(r.result.slice(0,500))}${r.result.length>500?"...":""}</pre></div>`).join("");
-}
-function clearHistory(){
-  if(confirm("Deseja limpar o histórico local?")){
-    history=[]; lastRecord=null; localStorage.removeItem("biomol_history_v1"); renderHistory();
-  }
-}
-
-if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
-}
-calcDil(); calcQPCR(); calcMix(); calcOligo(); calcCopies(); calcStd(); calcSerial(); calcAnneal(); calcIllumina();
+const APP={lab:"LACEN-AL",developer:"Jean Nascimento",version:"1.1"};let lastRecord=null;let history=JSON.parse(localStorage.getItem("biomol_history_v11")||"[]");
+function val(id){return parseFloat(document.getElementById(id).value)} function str(id){return document.getElementById(id).value||""}
+function fmt(x){if(!isFinite(x))return"erro";if(Math.abs(x)>=100000||(Math.abs(x)>0&&Math.abs(x)<0.001))return x.toExponential(4).replace(".",",");return (Math.round(x*10000)/10000).toString().replace(".",",")}
+function fmtDot(x){if(!isFinite(x))return"erro";if(Math.abs(x)>=100000||(Math.abs(x)>0&&Math.abs(x)<0.001))return x.toExponential(4);return Math.round(x*10000)/10000}
+function moduleTitle(){const m=str("moduleName").trim()||"módulo não informado";return `Cálculos para Reações de PCR de ${m}`}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+function nowBR(){return new Date().toLocaleString("pt-BR")}
+function setResult(elementId,calcName,text,inputObj){document.getElementById(elementId).innerText=text;lastRecord={date:nowBR(),lab:APP.lab,developer:APP.developer,version:APP.version,module:str("moduleName").trim(),header:moduleTitle(),calculator:calcName,inputs:inputObj||{},result:text};history.unshift(lastRecord);history=history.slice(0,100);localStorage.setItem("biomol_history_v11",JSON.stringify(history))}
+document.querySelectorAll(".tab").forEach(btn=>{btn.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll("section.card").forEach(s=>s.classList.add("hide"));document.getElementById(btn.dataset.target).classList.remove("hide");if(btn.dataset.target==="historico")renderHistory()})});
+function calcDil(){const c1=val("d_c1"),c2=val("d_c2"),v2=val("d_v2");const v1=c2*v2/c1,dil=v2-v1,cu=str("d_cunit"),vu=str("d_vunit");setResult("res_dil","Diluição C1V1",`Fórmula: C1 × V1 = C2 × V2\nV1 = (C2 × V2) / C1\n\nC1 = ${fmt(c1)} ${cu}\nC2 = ${fmt(c2)} ${cu}\nV2 = ${fmt(v2)} ${vu}\n\nVolume do estoque, V1 = ${fmt(v1)} ${vu}\nVolume de diluente = ${fmt(dil)} ${vu}\n\nMontagem:\n${fmt(v1)} ${vu} do estoque + ${fmt(dil)} ${vu} de diluente = ${fmt(v2)} ${vu}`,{C1:c1,C2:c2,V2:v2})}
+function calcQPCR(){const vol=val("q_vol"),n=val("q_n"),extra=val("q_extra"),mult=n*(1+extra/100),mmFactor=val("q_mm_factor"),template=val("q_template"),fixedWater=val("q_fixedwater"),usemix=str("q_usemix");let lines=[];lines.push(`Reações: ${fmt(n)} + ${fmt(extra)}% excedente = ${fmt(mult)} reações equivalentes`);lines.push(`Volume final por reação: ${fmt(vol)} µL`);const mm=mmFactor===1?0:vol/mmFactor;lines.push(`Master mix ${fmt(mmFactor)}x: ${fmt(mm)} µL/reação | total ${fmt(mm*mult)} µL`);lines.push(`DNA/RNA/cDNA: ${fmt(template)} µL/reação | total ${fmt(template*mult)} µL`);if(usemix==="yes"){const factor=val("q_mixfactor"),mixVol=vol/factor,water=vol-mm-template-fixedWater-mixVol;lines.push(`Primer/sonda mix ${fmt(factor)}x: ${fmt(mixVol)} µL/reação | total ${fmt(mixVol*mult)} µL`);lines.push(`Água: ${fmt(water)} µL/reação | total ${fmt(water*mult)} µL`)}else{const pStock=val("q_p_stock"),pFinal=val("q_p_final"),probeStock=val("q_probe_stock"),probeFinal=val("q_probe_final"),pf=pFinal*vol/pStock,pr=pf,probe=probeFinal>0?probeFinal*vol/probeStock:0,water=vol-mm-template-fixedWater-pf-pr-probe;lines.push(`Primer F: ${fmt(pf)} µL/reação | total ${fmt(pf*mult)} µL`);lines.push(`Primer R: ${fmt(pr)} µL/reação | total ${fmt(pr*mult)} µL`);lines.push(`Sonda: ${fmt(probe)} µL/reação | total ${fmt(probe*mult)} µL`);lines.push(`Água: ${fmt(water)} µL/reação | total ${fmt(water*mult)} µL`)}if(fixedWater>0)lines.push(`Água adicional fixa: ${fmt(fixedWater)} µL/reação | total ${fmt(fixedWater*mult)} µL`);lines.push(`\nConferência: os componentes devem somar ${fmt(vol)} µL por reação.`);setResult("res_qpcr","Montagem de PCR/qPCR",lines.join("\n"),{volume_reacao:vol,reacoes:n})}
+function calcMix(){const factor=val("m_factor"),v=val("m_vol"),stock=val("m_stock"),pf=val("m_pf"),pr=val("m_pr"),probe=val("m_probe"),pfMix=pf*factor,prMix=pr*factor,probeMix=probe*factor,vpf=pfMix*v/stock,vpr=prMix*v/stock,vprobe=probeMix*v/stock,water=v-vpf-vpr-vprobe;setResult("res_mix","Mix primer-sonda concentrado",`Concentração desejada no mix ${fmt(factor)}x:\nPrimer F = ${fmt(pfMix)} µM\nPrimer R = ${fmt(prMix)} µM\nSonda = ${fmt(probeMix)} µM\n\nPara ${fmt(v)} µL de mix a partir de estoque ${fmt(stock)} µM:\nPrimer F: ${fmt(vpf)} µL\nPrimer R: ${fmt(vpr)} µL\nSonda: ${fmt(vprobe)} µL\nÁgua/TE baixo EDTA: ${fmt(water)} µL\n\nEm reação de 20 µL, usar ${fmt(20/factor)} µL do mix.`,{fator:factor})}
+function calcOligo(){let amount=val("o_amount");const unit=str("o_unit"),conc=val("o_conc");if(unit==="pmol")amount=amount/1000;const volul=amount/conc*1000;setResult("res_oligo","Reconstituição de oligonucleotídeo",`Quantidade = ${fmt(amount)} nmol\nConcentração desejada = ${fmt(conc)} µM\n\nVolume para reconstituição = ${fmt(volul)} µL\n\nRelação usada:\nµM = nmol/mL\nV(mL) = nmol / µM\nV(µL) = (nmol / µM) × 1000`,{})}
+function calcCopies(){const mass=val("c_mass"),unit=str("c_unit"),len=val("c_len"),mw=val("c_type"),factor=unit==="ng"?1e-9:unit==="pg"?1e-12:1e-15,copies=(mass*factor*6.02214076e23)/(len*mw);setResult("res_copies","Número de cópias por µL",`Concentração = ${fmt(mass)} ${unit}/µL\nTamanho = ${fmt(len)} bp/nt\nMassa molar aproximada = ${fmt(mw)} g/mol por bp/nt\n\nCópias/µL = ${fmt(copies)}\nlog10(cópias/µL) = ${fmt(Math.log10(copies))}\n\nFórmula:\ncópias/µL = [massa(g/µL) × 6,022×10²³] / [tamanho × massa molar]`,{})}
+function calcStd(){const slope=val("s_slope"),intercept=str("s_intercept"),r2=str("s_r2"),eff=(Math.pow(10,-1/slope)-1)*100;let text=`Slope = ${fmt(slope)}\nEficiência = ${fmt(eff)}%\n`;if(intercept!=="")text+=`Intercepto = ${intercept}\n`;if(r2!=="")text+=`R² = ${r2}\n`;text+=`\nInterpretação usual:\n90–110%: faixa geralmente aceitável para qPCR\nSlope ideal aproximado: -3,32\nR² desejável: ≥0,98 ou ≥0,99, conforme critério do laboratório/estudo`;setResult("res_std","Curva padrão qPCR",text,{})}
+function calcSerial(){const start=val("ser_start"),factor=val("ser_factor"),n=parseInt(val("ser_n")),vf=val("ser_vfinal"),vt=val("ser_vtransfer"),unit=str("ser_unit"),diluent=vf-vt;let lines=["Ponto\tDiluição\tConcentração ("+unit+")\tPreparo sugerido"];for(let i=0;i<n;i++){const conc=start/Math.pow(factor,i),dil=i===0?"estoque":`1:${fmtDot(Math.pow(factor,i))}`,prep=i===0?"usar estoque/padrão inicial":`${fmt(vt)} µL do ponto anterior + ${fmt(diluent)} µL diluente`;lines.push(`${i+1}\t${dil}\t${fmt(conc)}\t${prep}`)}setResult("res_serial","Diluição seriada",lines.join("\n"),{})}
+function linspace(a,b,n){if(n<=1)return[a];const step=(b-a)/(n-1);return Array.from({length:n},(_,i)=>a+i*step)}
+function calcAnneal(){const tmF=val("a_tm_f"),tmR=val("a_tm_r"),points=parseInt(val("a_points")),lowOff=val("a_low"),highOff=val("a_high"),type=str("a_type"),tmLow=Math.min(tmF,tmR),tmHigh=Math.max(tmF,tmR),delta=Math.abs(tmF-tmR);let initial,rangeLow,rangeHigh;if(type==="convencional"){initial=tmLow-5;rangeLow=tmLow+lowOff;rangeHigh=tmLow+highOff}else{initial=tmLow-3;rangeLow=tmLow-5;rangeHigh=tmLow+2}let temps=linspace(rangeLow,rangeHigh,Math.max(points,2)).map(x=>fmt(x)).join(" °C | ")+" °C";let alerts=[];if(delta>5)alerts.push("ATENÇÃO: diferença entre Tm dos primers >5 °C. Considere redesenho ou gradiente mais amplo.");setResult("res_anneal","Cálculo de temperatura de anelamento",`Tm Forward = ${fmt(tmF)} °C\nTm Reverse = ${fmt(tmR)} °C\nMenor Tm = ${fmt(tmLow)} °C\nMaior Tm = ${fmt(tmHigh)} °C\nΔTm = ${fmt(delta)} °C\n\nSugestão inicial de temperatura de anelamento:\nTa inicial ≈ ${fmt(initial)} °C\n\nGradiente sugerido para teste:\n${temps}\n\nInterpretação prática:\n- Bandas inespecíficas ou primer-dimer: testar Ta mais alta.\n- Ausência ou baixa intensidade de banda: testar Ta mais baixa.\n- Para diagnóstico, escolher condição com melhor especificidade, eficiência e reprodutibilidade.\n\n${alerts.length?alerts.join("\n"):"Sem alertas críticos com os valores informados."}`,{})}
+function calcIllumina(){const conc=val("i_conc"),target=val("i_target"),finalVol=val("i_finalvol"),naoh=val("i_naoh"),bufferName=str("i_buffer"),targetNm=target/1000,vBio=(targetNm*finalVol)/conc,vBuffer=finalVol-(vBio+naoh);let lines=[];lines.push(`Objetivo: preparar ${fmt(finalVol)} µL de biblioteca desnaturada a ${fmt(target)} pM`);lines.push(`Concentração atual do lote: ${fmt(conc)} nM`);lines.push(`Tampão: ${bufferName}`);lines.push("");lines.push("Fórmula universal:");lines.push("V_biblioteca = (Concentração final em nM × Volume final) / Concentração atual em nM");lines.push(`V_biblioteca = (${fmt(targetNm)} nM × ${fmt(finalVol)} µL) / ${fmt(conc)} nM`);lines.push("");lines.push(`Volume de biblioteca: ${fmt(vBio)} µL`);lines.push(`Volume de NaOH 0,2N: ${fmt(naoh)} µL`);lines.push(`Volume de tampão ${bufferName}: ${fmt(vBuffer)} µL`);lines.push("");lines.push("Instruções de bancada:");lines.push(`1. Em tubo livre de nuclease, adicionar ${fmt(vBio)} µL da biblioteca.`);lines.push(`2. Adicionar exatamente ${fmt(naoh)} µL de NaOH 0,2N recentemente diluído.`);lines.push("3. Misturar por inversão ou vórtex rápido e dar pulso no minicen.");lines.push("4. Incubar por 5 minutos em temperatura ambiente para desnaturação.");lines.push(`5. Adicionar imediatamente ${fmt(vBuffer)} µL de tampão ${bufferName} para neutralização.`);lines.push(`6. Homogeneizar. O tubo final terá ${fmt(finalVol)} µL a ${fmt(target)} pM.`);lines.push("7. Seguir as diluições finais do manual do equipamento para atingir a concentração de carga.");lines.push("");if(conc<1){lines.push("ATENÇÃO: concentração abaixo de 1,0 nM. O volume de biblioteca será alto e pode afetar a eficiência da desnaturação. Considerar concentrar a amostra, por exemplo com SpeedVac ou esferas AMPure XP, antes do preparo.")}else if(conc<2){lines.push("Atenção: concentração baixa. Conferir se o volume de biblioteca é compatível com o protocolo e com o desempenho esperado da desnaturação.")}if(vBuffer<0)lines.push("ERRO: o volume de tampão ficou negativo. Revise concentração atual, volume final, concentração final ou volume de NaOH.");if(str("i_table")==="yes"){const concs=[4.0,3.5,3.0,2.5,2.0,1.5,1.0];lines.push("");lines.push("Tabela rápida de bancada para 1000 µL finais a 20 pM e 5 µL NaOH:");lines.push("Conc. atual (nM)\tVol. biblioteca (µL)\tVol. NaOH 0,2N (µL)\tVol. tampão (µL)");for(const c of concs){const vb=(0.020*1000)/c,vt=1000-(vb+5);lines.push(`${fmt(c)}\t${fmt(vb)}\t${fmt(5)}\t${fmt(vt)}`)}}setResult("res_illumina","Normalização/Desnaturação Illumina 20 pM",lines.join("\n"),{})}
+function buildReport(records){const list=Array.isArray(records)?records:[records],title=list[0]?.header||moduleTitle();let body="";for(const r of list){body+=`<h2>${escapeHTML(r.calculator)}</h2><table><tr><th>Data/hora</th><td>${escapeHTML(r.date)}</td></tr><tr><th>Módulo informado</th><td>${escapeHTML(r.module||"módulo não informado")}</td></tr><tr><th>Aplicativo</th><td>LACEN-AL BioMol Calc v${APP.version}</td></tr></table><h3>Resultado</h3><pre>${escapeHTML(r.result)}</pre>`}return`<!doctype html><html><head><meta charset="utf-8"><title>${escapeHTML(title)}</title><style>body{font-family:Arial,sans-serif;color:#111827;padding:24px}h1{color:#1d4ed8;font-size:22px}h2{font-size:17px;margin-top:22px;border-top:1px solid #dbe3ef;padding-top:12px}.sub{color:#64748b;font-size:12px;margin-bottom:18px}table{border-collapse:collapse;width:100%;margin:8px 0 12px}th,td{border:1px solid #dbe3ef;padding:7px;text-align:left;font-size:12px}th{width:28%;background:#f1f5f9}pre{white-space:pre-wrap;background:#f8fafc;border:1px solid #dbe3ef;border-radius:8px;padding:12px;font-size:12px;line-height:1.45}footer{margin-top:24px;color:#64748b;font-size:11px}</style></head><body><h1>${escapeHTML(title)}</h1><div class="sub">Laboratório: ${APP.lab} • Desenvolvedor: ${APP.developer} • Versão: ${APP.version}</div>${body}<footer>Relatório gerado automaticamente pelo LACEN-AL BioMol Calc.</footer></body></html>`}
+function exportPDF(all=false){let records=all?history.slice().reverse():(lastRecord?[lastRecord]:null);if(!records||records.length===0){alert("Nenhum cálculo disponível para exportar.");return}const w=window.open("","_blank");w.document.open();w.document.write(buildReport(records));w.document.close();setTimeout(()=>{w.focus();w.print()},400)}
+function exportExcel(all=false){let records=all?history.slice().reverse():(lastRecord?[lastRecord]:null);if(!records||records.length===0){alert("Nenhum cálculo disponível para exportar.");return}const title=records[0].header||moduleTitle();let rows=`<tr><th colspan="7">${escapeHTML(title)}</th></tr><tr><th>Laboratório</th><td colspan="6">${APP.lab}</td></tr><tr><th>Desenvolvedor</th><td colspan="6">${APP.developer}</td></tr><tr><th>Versão</th><td colspan="6">${APP.version}</td></tr><tr><th>Data/hora</th><th>Módulo informado</th><th>Calculadora</th><th>Resultado</th><th>Aplicativo</th><th>Laboratório</th><th>Desenvolvedor</th></tr>`;for(const r of records){rows+=`<tr><td>${escapeHTML(r.date)}</td><td>${escapeHTML(r.module||"módulo não informado")}</td><td>${escapeHTML(r.calculator)}</td><td style="white-space:pre-wrap">${escapeHTML(r.result)}</td><td>LACEN-AL BioMol Calc v${APP.version}</td><td>${APP.lab}</td><td>${APP.developer}</td></tr>`}const blob=new Blob(["\ufeff",`<!doctype html><html><head><meta charset="utf-8"></head><body><table border="1">${rows}</table></body></html>`],{type:"application/vnd.ms-excel;charset=utf-8"});const a=document.createElement("a"),safeModule=(records[0].module||"modulo").replace(/[^a-z0-9_-]+/gi,"_");a.href=URL.createObjectURL(blob);a.download=`LACEN-AL_BioMolCalc_${safeModule}_${new Date().toISOString().slice(0,10)}.xls`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(a.href)}
+function renderHistory(){const el=document.getElementById("historyList");if(history.length===0){el.innerHTML=`<p class="small">Nenhum cálculo salvo ainda.</p>`;return}el.innerHTML=history.map((r,i)=>`<div class="history-item"><b>${i+1}. ${escapeHTML(r.calculator)}</b><br><span class="small">${escapeHTML(r.date)} • ${escapeHTML(r.module||"módulo não informado")}</span><pre class="small">${escapeHTML(r.result.slice(0,500))}${r.result.length>500?"...":""}</pre></div>`).join("")}
+function clearHistory(){if(confirm("Deseja limpar o histórico local?")){history=[];lastRecord=null;localStorage.removeItem("biomol_history_v11");renderHistory()}}
+if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}))}
+calcDil();calcQPCR();calcMix();calcOligo();calcCopies();calcStd();calcSerial();calcAnneal();calcIllumina();
 </script>
-</body>
-</html>
+</body></html>

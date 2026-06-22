@@ -34,12 +34,6 @@ https://nascimento-jean.github.io/lacen-al-biomol-calc/
 - Exportação dos cálculos em PDF ou Excel
 - Histórico local dos cálculos no navegador/dispositivo
 
-## Campo de módulo
-
-O usuário pode preencher o campo **Módulo informado pelo usuário**. Esse texto aparece no cabeçalho dos relatórios como:
-
-> Cálculos para Reações de PCR de {módulo informado}
-
 ## Instalação no Android
 
 1. Abra o link no Google Chrome:  
@@ -55,9 +49,3 @@ O usuário pode preencher o campo **Módulo informado pelo usuário**. Esse text
 2. Toque em **Compartilhar**.
 3. Escolha **Adicionar à Tela de Início**.
 4. Confirme em **Adicionar**.
-
-## Observação
-
-Este app é uma PWA, ou seja, um aplicativo web instalável. Ele não é um APK Android nativo nem um IPA iOS nativo.
-
-A vantagem é que pode ser instalado em Android e iOS diretamente pelo navegador, sem Play Store, App Store ou assinatura de aplicativo. As atualizações são feitas substituindo os arquivos no GitHub.

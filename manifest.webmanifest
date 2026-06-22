@@ -1,7 +1,7 @@
 {
   "name": "LACEN-AL BioMol Calc",
   "short_name": "BioMol Calc",
-  "description": "Calculadora instalável para rotina de PCR, qPCR e Biologia Molecular.",
+  "description": "Calculadora instalável para rotina de PCR, qPCR, Illumina e Biologia Molecular.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
