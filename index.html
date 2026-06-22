@@ -62,7 +62,7 @@ footer{color:var(--muted);font-size:.82rem;padding:18px;text-align:center}
   <div class="meta">
     <div class="box"><b>Laboratório</b>LACEN-AL</div>
     <div class="box"><b>Desenvolvedor</b>Jean Nascimento</div>
-    <div class="box"><b>Versão</b>1.0</div>
+    <div class="box"><b>Versão</b>1.1</div>
   </div>
 </header>
 
@@ -82,6 +82,7 @@ footer{color:var(--muted);font-size:.82rem;padding:18px;text-align:center}
     <button class="tab" data-target="curva">Curva qPCR</button>
     <button class="tab" data-target="serial">Diluição seriada</button>
     <button class="tab" data-target="anelamento">Temp. Anelamento</button>
+    <button class="tab" data-target="illumina">Illumina 20 pM</button>
     <button class="tab" data-target="historico">Histórico</button>
   </div>
 
@@ -222,6 +223,25 @@ footer{color:var(--muted);font-size:.82rem;padding:18px;text-align:center}
     <div class="note">Regra prática geral: iniciar perto de 3–5 °C abaixo do menor Tm e validar por PCR em gradiente. Se houver bandas inespecíficas, testar temperaturas mais altas; se houver baixa amplificação, testar temperaturas mais baixas.</div>
   </section>
 
+
+  <section id="illumina" class="card hide">
+    <h2>Normalização/Desnaturação Illumina — biblioteca a 20 pM</h2>
+    <p class="hint">Calcula o volume de biblioteca, NaOH 0,2N e tampão HT1/HP3 para preparar biblioteca desnaturada. Modelo padrão: 1000 µL finais a 20 pM, com 5 µL fixos de NaOH 0,2N.</p>
+    <div class="grid3">
+      <div><label>Concentração atual do lote (nM)</label><input id="i_conc" type="number" step="any" value="4"></div>
+      <div><label>Concentração final desejada (pM)</label><input id="i_target" type="number" step="any" value="20"></div>
+      <div><label>Volume final desejado (µL)</label><input id="i_finalvol" type="number" step="any" value="1000"></div>
+    </div>
+    <div class="grid3">
+      <div><label>Volume de NaOH 0,2N (µL)</label><input id="i_naoh" type="number" step="any" value="5"></div>
+      <div><label>Tampão de hibridização</label><select id="i_buffer"><option>HT1</option><option>HP3</option><option>HT1/HP3</option></select></div>
+      <div><label>Gerar tabela de bancada?</label><select id="i_table"><option value="yes">Sim</option><option value="no">Não</option></select></div>
+    </div>
+    <div class="btnrow"><button class="action" onclick="calcIllumina()">Calcular</button><button class="secondary" onclick="exportPDF()">Exportar PDF</button><button class="secondary" onclick="exportExcel(false)">Exportar Excel</button></div>
+    <div id="res_illumina" class="result"></div>
+    <div class="note">Atenção: este módulo adapta o cálculo quando o lote não atinge 4 nM. A concentração de carga final ainda deve seguir o manual específico do equipamento, kit e run setup utilizados.</div>
+  </section>
+
   <section id="historico" class="card hide">
     <h2>Histórico local de cálculos</h2>
     <p class="hint">O histórico fica salvo apenas no navegador/dispositivo usado.</p>
@@ -230,10 +250,10 @@ footer{color:var(--muted);font-size:.82rem;padding:18px;text-align:center}
   </section>
 </main>
 
-<footer>LACEN-AL BioMol Calc • Desenvolvedor: Jean Nascimento • Versão 1.0</footer>
+<footer>LACEN-AL BioMol Calc • Desenvolvedor: Jean Nascimento • Versão 1.1</footer>
 
 <script>
-const APP = {lab:"LACEN-AL", developer:"Jean Nascimento", version:"1.0"};
+const APP = {lab:"LACEN-AL", developer:"Jean Nascimento", version:"1.1"};
 let lastRecord = null;
 let history = JSON.parse(localStorage.getItem("biomol_history_v1") || "[]");
 
@@ -476,6 +496,58 @@ ${alerts.length ? alerts.join("\n") : "Sem alertas críticos com os valores info
   setResult("res_anneal", "Cálculo de temperatura de anelamento", text, {Tm_forward:tmF, Tm_reverse:tmR, delta_Tm:delta, tipo:type, pontos:points});
 }
 
+
+function calcIllumina(){
+  const conc=val('i_conc'), target=val('i_target'), finalVol=val('i_finalvol'), naoh=val('i_naoh');
+  const bufferName=str('i_buffer');
+  const targetNm = target/1000;
+  const vBio = (targetNm * finalVol) / conc;
+  const vBuffer = finalVol - (vBio + naoh);
+  let lines=[];
+  lines.push(`Objetivo: preparar ${fmt(finalVol)} µL de biblioteca desnaturada a ${fmt(target)} pM`);
+  lines.push(`Concentração atual do lote: ${fmt(conc)} nM`);
+  lines.push(`Tampão: ${bufferName}`);
+  lines.push("");
+  lines.push("Fórmula universal:");
+  lines.push("V_biblioteca = (Concentração final em nM × Volume final) / Concentração atual em nM");
+  lines.push(`V_biblioteca = (${fmt(targetNm)} nM × ${fmt(finalVol)} µL) / ${fmt(conc)} nM`);
+  lines.push("");
+  lines.push(`Volume de biblioteca: ${fmt(vBio)} µL`);
+  lines.push(`Volume de NaOH 0,2N: ${fmt(naoh)} µL`);
+  lines.push(`Volume de tampão ${bufferName}: ${fmt(vBuffer)} µL`);
+  lines.push("");
+  lines.push("Instruções de bancada:");
+  lines.push(`1. Em tubo livre de nuclease, adicionar ${fmt(vBio)} µL da biblioteca.`);
+  lines.push(`2. Adicionar exatamente ${fmt(naoh)} µL de NaOH 0,2N recentemente diluído.`);
+  lines.push("3. Misturar por inversão ou vórtex rápido e dar pulso no minicen.");
+  lines.push("4. Incubar por 5 minutos em temperatura ambiente para desnaturação.");
+  lines.push(`5. Adicionar imediatamente ${fmt(vBuffer)} µL de tampão ${bufferName} para neutralização.`);
+  lines.push(`6. Homogeneizar. O tubo final terá ${fmt(finalVol)} µL a ${fmt(target)} pM.`);
+  lines.push("7. Seguir as diluições finais do manual do equipamento para atingir a concentração de carga.");
+  lines.push("");
+  if(conc < 1){
+    lines.push("ATENÇÃO: concentração abaixo de 1,0 nM. O volume de biblioteca será alto e pode afetar a eficiência da desnaturação. Considerar concentrar a amostra, por exemplo com SpeedVac ou esferas AMPure XP, antes do preparo.");
+  } else if(conc < 2){
+    lines.push("Atenção: concentração baixa. Conferir se o volume de biblioteca é compatível com o protocolo e com o desempenho esperado da desnaturação.");
+  }
+  if(vBuffer < 0){
+    lines.push("ERRO: o volume de tampão ficou negativo. Revise concentração atual, volume final, concentração final ou volume de NaOH.");
+  }
+  if(str('i_table') === "yes"){
+    const concs=[4.0,3.5,3.0,2.5,2.0,1.5,1.0];
+    lines.push("");
+    lines.push("Tabela rápida de bancada para 1000 µL finais a 20 pM e 5 µL NaOH:");
+    lines.push("Conc. atual (nM)\tVol. biblioteca (µL)\tVol. NaOH 0,2N (µL)\tVol. tampão (µL)");
+    for(const c of concs){
+      const vb=(0.020*1000)/c;
+      const vt=1000-(vb+5);
+      lines.push(`${fmt(c)}\t${fmt(vb)}\t${fmt(5)}\t${fmt(vt)}`);
+    }
+  }
+  setResult("res_illumina", "Normalização/Desnaturação Illumina 20 pM", lines.join("\\n"), {concentracao_lote_nM:conc, concentracao_final_pM:target, volume_final_uL:finalVol, NaOH_uL:naoh, tampao:bufferName});
+}
+
+
 function buildReport(records){
   const list = Array.isArray(records) ? records : [records];
   const title = list[0]?.header || moduleTitle();
@@ -562,7 +634,7 @@ function clearHistory(){
 if("serviceWorker" in navigator){
   window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
 }
-calcDil(); calcQPCR(); calcMix(); calcOligo(); calcCopies(); calcStd(); calcSerial(); calcAnneal();
+calcDil(); calcQPCR(); calcMix(); calcOligo(); calcCopies(); calcStd(); calcSerial(); calcAnneal(); calcIllumina();
 </script>
 </body>
 </html>
